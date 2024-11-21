@@ -8,27 +8,9 @@ const geojsonData = require("../data/geojson.json"); // JSON file with latitude-
 exports.getIntersectingTiles = async (req, res) => {
   try {
     const { aoi } = req.body;
-    console.log("AOI received: ", aoi,aoi.geometry.coordinates);
+    console.log("AOI received: ", aoi);
 
     
-  const data = {
-    type: "Feature",
-    properties: {},
-    geometry: {
-      type: "Polygon",
-      coordinates: [
-        [
-          [77.726907, 17.276561],
-          [75.650765, 15.739142],
-          [77.397361, 13.539549],
-          [79.35267, 15.209884],
-          [77.726907, 17.276561],
-        ],
-      ],
-    },
-  };
-
-
 
     
     // Find points in the GeoJSON that are inside the AOI polygon
@@ -40,7 +22,7 @@ exports.getIntersectingTiles = async (req, res) => {
       
 
       let polyIntersection = turf.intersect(
-        data,
+        aoi,
         feature
       );
 
